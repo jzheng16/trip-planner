@@ -2,28 +2,24 @@
 const Sequelize = require('sequelize');
 const db = require('./db');
 
-
-const Hotel = db.define('hotel', {
+var Restaurant = db.define('restaurant', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
   },
-
-  num_stars: {
+  cuisine: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  price: {
     type: Sequelize.INTEGER,
-    allowNull: false,
     validate: {
       min: 1,
-      max: 5
+      max: 4
     }
-  },
-
-  amenities: {
-    type: Sequelize.STRING
   }
-});
+})
 
 
 
-
-module.exports = Hotel;
+module.exports = Restaurant;

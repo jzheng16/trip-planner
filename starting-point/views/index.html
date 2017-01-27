@@ -2,4 +2,29 @@
 
 {% block content %}
 <h2>Index Page</h2>
+
+<div class = "dropdown">
+  <select>
+
+  {% for hotel in hotels %}
+  <option value = "{{hotel.name}}"> {{hotel.name}} </option>
+  {% endfor %}
+
+  </select>
+
+  <select>
+  {% for restaurant in restaurants %}
+  <option value = "{{restaurant.name}}"> {{restaurant.name}} </option>
+  {% endfor %}
+  </select>
+
+  <select>
+  {% for activity in activities %}
+  <option value = "{{activity.name}}"> {{activity.name}} </option>
+  {% endfor %}
+  </select>
+  </div>
+
+
+
 {% endblock %}
