@@ -1,3 +1,13 @@
-body {
-  background-color: white
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  .navbar {
+    border: gray;
+    border-radius: 2px;
+  }
+  #map {
+    height: 500px;
+  }
 }

@@ -1,15 +1,38 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Trip Planner</title>
-    <link href="/bootstrap" rel="stylesheet">
-    <link href = "/stylesheets/test.css" rel="stylesheet">
-
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/test.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Trip Planner!</h1>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img alt="map pin" src="https://img.clipartfest.com/4752b5566db4bb707e1e5273186c7057_location-icon-map-png-google-map-location-clipart_1200-1200.png" height="25" width="25">
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div id="map" class=col-lg-8>
+      <script>
+      let map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 73.9712, lng: 40.7831},
+          zoom: 8
+        });
+      }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7D-1-b3ey136TZLfGI0hWsBoLSOWLkUE&callback=initMap" async defer></script>
+    </div>
+    <
     {% block content %}{% endblock %}
   </body>
 
 
-  <script src = "/jquery"> </script>
+  <script src = "/jquery/jquery.min.js"></script>
 </html>
