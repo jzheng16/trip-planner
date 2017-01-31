@@ -1,5 +1,8 @@
 $(function initializeMap (){
-
+  var markerArray = [];
+  const hotelArr = [];
+  const activityArr = [];
+  const restaurantArr = [];
   var fullstackAcademy = new google.maps.LatLng(40.705086, -74.009151);
 
   var styleArr = [{
@@ -53,11 +56,77 @@ $(function initializeMap (){
       icon: iconURL,
       position: latLng
     });
-    marker.setMap(currentMap);
+
+
+   if (type === 'hotel') {
+    hotelArr.push(marker);
+    if (hotelArr.length > 1) {
+      hotelArr[0].setMap(null);
+      hotelArr.shift();
+    }
+  }
+   if (type === 'activity') activityArr.push(marker);
+   if (type === 'restaurant') restaurantArr.push(marker);
+   marker.setMap(currentMap);
+
+   //marker.getPosition().lat()
+    //marker.getPosition().lng()
+
   }
 
-  drawMarker('hotel', [40.705137, -74.007624]);
-  drawMarker('restaurant', [40.705137, -74.013940]);
-  drawMarker('activity', [40.716291, -73.995315]);
+  // drawMarker('hotel', [40.705137, -74.007624]);
+  // drawMarker('restaurant', [40.705137, -74.013940]);
+  // drawMarker('activity', [40.716291, -73.995315]);
+
+
+
+function findKey(obj, currentItem ){
+  for (var key in obj){
+    if (obj[key].name === currentItem){
+      return obj[key].place.location;
+    }
+  }
+}
+
+
+$('#hotel-choices').siblings('button').on('click', function(){
+    const currentHotel = $('#hotel-choices').find('option:selected').val();
+    const location = findKey(hotels, currentHotel);
+    var marker = drawMarker('hotel', location);
+});
+
+$('#restaurant-choices').siblings('button').on('click', function(){
+    const currentRestaurant = $('#restaurant-choices').find('option:selected').val();
+    const location = findKey(restaurants, currentRestaurant);
+    drawMarker('restaurant', location);
+});
+
+$('#activity-choices').siblings('button').on('click', function(){
+    const currentActivity = $('#activity-choices').find('option:selected').val();
+    const location = findKey(activities, currentActivity);
+    drawMarker('activity', location);
+});
+
+
+$('.hotel-list').on('click', 'button', function(){
+    const currentHotel = $(this).prev().data('name');
+    const location = findKey(hotels, currentHotel);
+    hotelArr.forEach( (hotel, index, array) => {
+      let lat = parseFloat(hotel.getPosition().lat().toFixed(6));
+      let lng = parseFloat(hotel.getPosition().lng().toFixed(6));
+
+      if (lat === location[0] && lng === location[1]){
+        hotel.setMap(null);
+        array[index] = array[array.length - 1];
+        array.pop();
+
+      }
+    })
+
+})
+
+//Have to remove markers from itinerary
+
+
 
 });
